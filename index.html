@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <title>Connexion Manaria</title>
   <script>
-    // Extraire le paramètre ?link= ou #link=
-    const urlParams = new URLSearchParams(window.location.search || window.location.hash.slice(1));
-    const link = urlParams.get("link");
+    const params = new URLSearchParams(window.location.search);
+    const link = params.get("link");
 
     if (link) {
-      document.write("✅ Redirection en cours...");
+      document.body.innerText = "Redirection en cours...";
       window.location.href = `manaria://signin?link=${encodeURIComponent(link)}`;
     } else {
-      document.write("❌ Lien invalide ou manquant.");
+      document.body.innerText = "Lien invalide ou manquant.";
     }
   </script>
 </head>
