@@ -8,6 +8,7 @@
   <p id="status">Analyse du lien…</p>
 
   <a id="deepLink" href="#" style="display:none">Ouvrir l'app</a>
+  <p id="debug"></p>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -26,6 +27,7 @@
       }, 500);
     } else {
       document.getElementById("status").innerText = "Lien invalide ou manquant.";
+      document.getElementById("debug").innerText = window.location.href;
     }
   </script>
 </body>
