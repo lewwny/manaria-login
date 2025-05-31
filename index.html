@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Debug Manaria</title>
-  </head>
-  <body>
-    <p id="status">Chargement...</p>
-    <script>
-      const p = document.getElementById("status");
-      p.innerText = "Script exécuté ✅";
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion Manaria</title>
+</head>
+<body>
+  <p id="status">Analyse du lien…</p>
 
-      const params = new URLSearchParams(window.location.search);
-      const link = params.get("link");
+  <a id="deepLink" href="#" style="display:none">Ouvrir l'app</a>
 
-      if (link) {
-        p.innerText = "Redirection vers l'app avec le lien : " + link;
-      } else {
-        p.innerText = "❌ Lien invalide ou manquant.";
-      }
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const rawLink = params.get("link");
 
-      console.log("URL complète :", window.location.href);
-      console.log("Param link :", link);
-    </script>
-  </body>
+    if (rawLink) {
+      const redirectURL = `manaria://signin?link=${encodeURIComponent(rawLink)}`;
+      document.getElementById("status").innerText = "Redirection vers l'app…";
+
+      const a = document.getElementById("deepLink");
+      a.href = redirectURL;
+
+      // Petit délai pour afficher le texte
+      setTimeout(() => {
+        a.click();
+      }, 500);
+    } else {
+      document.getElementById("status").innerText = "Lien invalide ou manquant.";
+    }
+  </script>
+</body>
 </html>
