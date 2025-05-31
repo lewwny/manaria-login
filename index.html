@@ -6,28 +6,22 @@
 </head>
 <body>
   <p id="status">Analyse du lien…</p>
-
-  <a id="deepLink" href="#" style="display:none">Ouvrir l'app</a>
-  <p id="debug"></p>
-
   <script>
     const params = new URLSearchParams(window.location.search);
-    const rawLink = params.get("link");
+    const mode = params.get("mode");
+    const oobCode = params.get("oobCode");
+    const apiKey = params.get("apiKey");
 
-    if (rawLink) {
-      const redirectURL = `manaria://signin?link=${encodeURIComponent(rawLink)}`;
-      document.getElementById("status").innerText = "Redirection vers l'app…";
-
-      const a = document.getElementById("deepLink");
-      a.href = redirectURL;
-
-      // Petit délai pour afficher le texte
+    if (mode && oobCode && apiKey) {
+      const fullLink = `https://manariafinal.firebaseapp.com/__/auth/action?apiKey=${encodeURIComponent(apiKey)}&mode=${encodeURIComponent(mode)}&oobCode=${encodeURIComponent(oobCode)}`;
+      const redirectURL = `manaria://signin?link=${encodeURIComponent(fullLink)}`;
+      
+      document.getElementById("status").innerText = "Redirection...";
       setTimeout(() => {
-        a.click();
-      }, 500);
+        window.location.href = redirectURL;
+      }, 300);
     } else {
       document.getElementById("status").innerText = "Lien invalide ou manquant.";
-      document.getElementById("debug").innerText = window.location.href;
     }
   </script>
 </body>
