@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion Manaria</title>
+  <script>
+    // extraire le paramètre ?link= de l'URL
+    const params = new URLSearchParams(window.location.search);
+    const link = params.get("link");
+
+    if (link) {
+      // rediriger vers ton app iOS
+      window.location.href = `manaria://signin?link=${encodeURIComponent(link)}`;
+    } else {
+      document.write("Lien invalide ou manquant.");
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
