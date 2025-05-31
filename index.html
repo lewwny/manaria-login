@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Connexion Manaria</title>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const link = params.get("link");
+  <head>
+    <meta charset="UTF-8">
+    <title>Debug Manaria</title>
+  </head>
+  <body>
+    <p id="status">Chargement...</p>
+    <script>
+      const p = document.getElementById("status");
+      p.innerText = "Script exécuté ✅";
 
-    if (link) {
-      document.body.innerHTML = "Redirection...";
-      window.location.href = `manaria://signin?link=${encodeURIComponent(link)}`;
-    } else {
-      document.body.innerHTML = "Lien invalide ou manquant.";
-    }
-  </script>
-</head>
-<body>
-</body>
+      const params = new URLSearchParams(window.location.search);
+      const link = params.get("link");
+
+      if (link) {
+        p.innerText = "Redirection vers l'app avec le lien : " + link;
+      } else {
+        p.innerText = "❌ Lien invalide ou manquant.";
+      }
+
+      console.log("URL complète :", window.location.href);
+      console.log("Param link :", link);
+    </script>
+  </body>
 </html>
