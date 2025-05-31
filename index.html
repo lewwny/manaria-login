@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Connexion Manaria</title>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const link = params.get("link");
-
-    if (link) {
-      document.body.innerText = "Redirection en cours...";
-      window.location.href = `manaria://signin?link=${encodeURIComponent(link)}`;
-    } else {
-      document.body.innerText = "Lien invalide ou manquant.";
-    }
-  </script>
 </head>
 <body>
+  <p id="status">Analyse du lien…</p>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const rawLink = params.get("link");
+
+    if (rawLink) {
+      const redirectURL = `manaria://signin?link=${encodeURIComponent(rawLink)}`;
+      document.getElementById("status").innerText = "Redirection…";
+      // Attend un tout petit peu pour que le texte s'affiche avant la redirection
+      setTimeout(() => {
+        window.location.href = redirectURL;
+      }, 300);
+    } else {
+      document.getElementById("status").innerText = "Lien invalide ou manquant.";
+    }
+  </script>
 </body>
 </html>
